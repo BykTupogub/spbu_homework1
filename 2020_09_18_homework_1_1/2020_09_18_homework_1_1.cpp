@@ -1,11 +1,19 @@
 ﻿// 2020_09_18_homework_1_1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+//номер1
 
 #include <iostream>
+using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::cout << "Hello World!\n";
+    setlocale(LC_ALL, "Russian");
+    int x = 0, x2=0;
+    cout << "введите x:";
+    cin >> x;
+    x2 = x * x;
+    cout << endl << "x^4 + x^3 + x^2 + x + 1 = " << (x2 + x) * (x2 + 1) + 1 << endl;
+
+    return EXIT_SUCCESS;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
