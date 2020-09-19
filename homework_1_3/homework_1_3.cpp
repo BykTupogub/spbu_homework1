@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
         {
             c = s - a - b;
             if (c > 9) break;
+            ///////////
             if (s < 10)
                 aa = s;
             else
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
                     cout << a << b << c << " " << aa << bb << cc << endl;
                 }
             }
-            
+            ///////////  
         }
     }
 
