@@ -14,6 +14,16 @@ void printMenu()
 	cout << "5 - Развернуть две половинки массива. n - индекс элемента, разделяющего половинки" << endl;
 }
 
+void expend(int*& a, int& cap, int& count)
+{
+	cap *= 2;
+	int* temp = new int[cap];
+	for (int i = 0; i < count; ++i)
+		temp[i] = a[i];
+	delete[] a;
+	a = temp;
+}
+
 void cinArr(int*& a, int& cap, int& count)
 {
 	while (true)
@@ -24,12 +34,7 @@ void cinArr(int*& a, int& cap, int& count)
 			break;
 		if (count == cap)
 		{
-			cap *= 2;
-			int* temp = new int[cap];
-			for (int i = 0; i < count; ++i)
-				temp[i] = a[i];
-			delete[] a;
-			a = temp;
+			expend(a, cap, count);
 		}
 
 		a[count] = x;
@@ -129,24 +134,8 @@ bool reverseN(int* a, int const count, int const n)
 }
 
 
-
-
-
-
-
-int main(int argc, char* argv[])
+void menu(int*& a, int& cap, int& count)
 {
-	srand(time(0));
-	setlocale(LC_ALL, "Russian");
-
-	int cap = 10;
-	int* a = new int[cap];
-	int count = 0;
-	cinArr(a, cap, count);
-	printArr(a, count);
-
-
-
 	int choice = -1;
 	while (choice != 0)
 	{
@@ -205,6 +194,23 @@ int main(int argc, char* argv[])
 		}
 		}
 	}
+}
+
+
+
+
+int main(int argc, char* argv[])
+{
+	srand(time(0));
+	setlocale(LC_ALL, "Russian");
+
+	int cap = 10;
+	int* a = new int[cap];
+	int count = 0;
+	cinArr(a, cap, count);
+	printArr(a, count);
+
+	menu(a, cap, count);
 
 	delete[] a;
 	return EXIT_SUCCESS;
