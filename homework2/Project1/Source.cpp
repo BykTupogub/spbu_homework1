@@ -11,11 +11,11 @@ void printMenu()
 	cout << "6 - Вывести массив в обратном порядке" << endl;
 }
 
-void expendArr(int*& a, int& cap, int& count)
+void expendArr(int*& a, int& cap)
 {
 	cap *= 2;
 	int* temp = new int[cap];
-	for (int i = 0; i < count; ++i)
+	for (int i = 0; i < cap; ++i)
 		temp[i] = a[i];
 	delete[] a;
 	a = temp;
@@ -31,7 +31,7 @@ void cinArr(int*& a, int& cap, int& count)
 			break;
 		if (count == cap)
 		{
-			expendArr(a, cap, count);
+			expendArr(a, cap);
 		}
 
 		a[count] = x;
@@ -48,12 +48,7 @@ void addNumber(int* &a,  int &cap, int &count)
 	cin >> x;
 	if (count == cap)
 	{
-		cap++;
-		int* temp = new int[cap];
-		for (int i = 0; i < count; ++i)
-			temp[i] = a[i];
-		delete[] a;
-		a = temp;
+		expendArr(a, cap);
 	}
 
 	a[count] = x;
@@ -112,52 +107,47 @@ void reversePrint(int* a, int count)
 	cout << endl << endl;
 }
 
-void menu(int*& a, int& cap, int& count)
+void processChoice(int*& a, int& cap, int& count, int const choice)
 {
-	int choice = -1;
-	while (choice != 0)
+	
+	switch (choice)
 	{
-		printMenu();
-		cin >> choice;
-		switch (choice)
-		{
-		case 1:
-		{
-			system("cls");
-			addNumber(a, cap, count);
-			break;
-		}
-		case 2:
-		{
-			system("cls");
-			printArr(a, count);
-			break;
-		}
-		case 3:
-		{
-			system("cls");
-			cout << "номер максимального элмента равен " << searchMaxI(a, count) << endl << endl;
-			break;
-		}
-		case 4:
-		{
-			system("cls");
-			cout << "минимальный элмент равен " << searchMin(a, count) << endl << endl;
-			break;
-		}
-		case 5:
-		{
-			system("cls");
-			cout << "сумма элементов массива равна " << sumArr(a, count) << endl << endl;
-			break;
-		}
-		case 6:
-		{
-			system("cls");
-			reversePrint(a, count);
-			break;
-		}
-		}
+	case 1:
+	{
+		system("cls");
+		addNumber(a, cap, count);
+		break;
+	}
+	case 2:
+	{
+		system("cls");
+		printArr(a, count);
+		break;
+	}
+	case 3:
+	{
+		system("cls");
+		cout << "номер максимального элмента равен " << searchMaxI(a, count) << endl << endl;
+		break;
+	}
+	case 4:
+	{
+		system("cls");
+		cout << "минимальный элмент равен " << searchMin(a, count) << endl << endl;
+		break;
+	}
+	case 5:
+	{
+		system("cls");
+		cout << "сумма элементов массива равна " << sumArr(a, count) << endl << endl;
+		break;
+	}
+	case 6:
+	{
+		system("cls");
+		reversePrint(a, count);
+		break;
+	}
 	}
 }
 
@@ -172,7 +162,13 @@ int main(int argc, char* argv[])
 	int count = 0;
 	cinArr(a, cap, count);
 
-	menu(a, cap, count);
+	int choice = -1;
+	while (choice != 0)
+	{
+		printMenu();
+		cin >> choice;
+		processChoice(a, cap, count, choice);
+	}
 
 	delete[] a;
     return EXIT_SUCCESS;

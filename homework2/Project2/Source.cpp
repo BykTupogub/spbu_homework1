@@ -14,11 +14,11 @@ void printMenu()
 	cout << "5 - Развернуть две половинки массива. n - индекс элемента, разделяющего половинки" << endl;
 }
 
-void expend(int*& a, int& cap, int& count)
+void expend(int*& a, int& cap)
 {
 	cap *= 2;
 	int* temp = new int[cap];
-	for (int i = 0; i < count; ++i)
+	for (int i = 0; i < cap; ++i)
 		temp[i] = a[i];
 	delete[] a;
 	a = temp;
@@ -34,7 +34,7 @@ void cinArr(int*& a, int& cap, int& count)
 			break;
 		if (count == cap)
 		{
-			expend(a, cap, count);
+			expend(a, cap);
 		}
 
 		a[count] = x;
@@ -49,12 +49,7 @@ void addNumber(int*& arr, int& cap, int& count, int const n, int const a, int co
 	{
 		if (count == cap)
 		{
-			++cap;
-			int* temp = new int[cap];
-			for (int i = 0; i < count; ++i)
-				temp[i] = arr[i];
-			delete[] arr;
-			arr = temp;
+			expend(arr, cap);
 		}
 
 		arr[count] = rand() % (b - a + 1) + a;
@@ -134,13 +129,9 @@ bool reverseN(int* a, int const count, int const n)
 }
 
 
-void menu(int*& a, int& cap, int& count)
+void processChoice(int*& a, int& cap, int& count, int const choice)
 {
-	int choice = -1;
-	while (choice != 0)
-	{
-		printMenu();
-		cin >> choice;
+	
 		switch (choice)
 		{
 		case 1:
@@ -192,8 +183,7 @@ void menu(int*& a, int& cap, int& count)
 			printArr(a, count);
 			break;
 		}
-		}
-	}
+		} 
 }
 
 
@@ -210,8 +200,13 @@ int main(int argc, char* argv[])
 	cinArr(a, cap, count);
 	printArr(a, count);
 
-	menu(a, cap, count);
-
+	int choice = -1;
+	while (choice != 0)
+	{
+		printMenu();
+		cin >> choice;
+		processChoice(a, cap, count, choice);
+	}
 	delete[] a;
 	return EXIT_SUCCESS;
 }
