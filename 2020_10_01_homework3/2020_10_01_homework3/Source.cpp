@@ -17,6 +17,7 @@ void printMenu()
 	cout << "7 - Вставка элемента в массив" << endl;
 	cout << "8 - Удаление нескольких подряд идущих элементов массива" << endl;
 	cout << "9 - Поиск подпоследовательности" << endl;
+	cout << "10 - Извлечение элмента" << endl;
 }
 
 int* initArray(int capacity = 10)
@@ -46,7 +47,7 @@ void deleteArray(int* arr)
 void expandArray(int*& arr)
 {
 	int* temp = initArray(*(arr - 1) * 2);
-	for (int i = 0; i < arr[-1]; i++)
+	for (int i = 0; i < *(arr - 1); i++)
 	{
 		*(temp + i) = *(arr + i);
 	}
@@ -76,7 +77,7 @@ void addRandomElements(int*& arr, int n, int min, int max)
 
 void printArray(int* arr)
 {
-	cout << "[" << arr[-2] << "/" << arr[-1] << "] {";
+	cout << "[" << *(arr - 2) << "/" << *(arr - 2) << "] {";
 	for (int i = 0; i < *(arr - 2); ++i)
 	{
 		cout << *(arr + i) << (i == *(arr - 2) - 1 ? "}\n" : ", ");
@@ -107,10 +108,8 @@ void add(int*& arr, int* addedArr)
 
 int* unify(int* a, int* b)
 {
-	int* result = new int[*(a - 2) + *(b - 2) + 2]{ 0 };
-	result += 2;
-	result[-1] = *(a - 2) + *(a - 2);
-	result[-2] = 0;
+	int* result = initArray(*(a - 2) + *(b - 2));
+	*(result - 1) = *(a - 2) + *(a - 2);
 	for (int i = 0; i < *(result - 1); i++)
 	{
 		if ((i % 2 == 0) & (i / 2 < *(a - 2)))
@@ -131,29 +130,28 @@ int extract(int* a, int index)
 
 	int returns = -1;
 
-	if ((index < a[-2]) & (index > -1))
+	if ((index < *(a - 2)) & (index > -1))
 	{
 		returns = a[index];
 		for (int i = index; i < *(a - 2) - 1; i++)
 		{
-			a[i] = *(a + i + 1);
+			*(a + i) = *(a + i + 1);
 		}
 		*(a + *(a - 2) - 1) = 0;
-		--* (a - 2);
+		--*(a - 2);
 	}
 	return returns;
 }
 
 int insert(int*& a, int index, int element)
 {
-	int* temp = new int[*(a - 2) + 3];
-	temp += 2;
+	int* temp = initArray(*(a - 2) + 1);
 	int returns = 1;
 	if ((index <= *(a - 2)) & (index > -1))
 	{
 		returns = 0;
 		*(temp - 2) = *(a - 2) + 1;
-		for (int i = -1; i < a[-2] + 1; i++)
+		for (int i = -1; i < *(a - 2) + 1; i++)
 		{
 			if (i < index)
 			{
@@ -182,10 +180,11 @@ int deleteGroup(int* a, int startIndex, int count)
 	if ((startIndex > -1) & ((startIndex + count) < *(a - 2)))
 	{
 		returns = 0;
-		for (int i = 0; i < count; i++)
+		for (int i = startIndex; i < (*(a - 2) - count); i++)
 		{
-			extract(a, startIndex);
+			*(a + i) = *(a + i + count);
 		}
+		*(a - 2) -= count;
 	}
 
 	return returns;
@@ -326,11 +325,11 @@ void processChoice(int*& arr1, int*& arr2, int choice)
 		{
 			cout << "ошибка" << endl;
 		}
-		
+		break;
 	}
 	case 9:
 	{
-		cout << "введите икомую пледовательность:" << endl;
+		cout << "введите искомую последовательность:" << endl;
 		int x = 0;
 		cin >> x;
 		while (x != 0)
@@ -353,6 +352,24 @@ void processChoice(int*& arr1, int*& arr2, int choice)
 
 		break;
 	}
+	case 10:
+	{
+		cout << "введите индекс:" << endl;
+		int x = 0;
+		cin >> x;
+		int element = extract(arr1, x);
+		if (element != -1)
+		{
+			cout << "извлечённый элемент равен " << element << endl;
+		}
+		else
+		{
+			cout << "ошибка" << endl;
+		}
+
+		break;
+	}
+
 	}
 }
 
