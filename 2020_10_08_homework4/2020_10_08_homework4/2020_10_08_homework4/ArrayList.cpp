@@ -90,10 +90,9 @@ void ArrayList::addAll(ArrayList& list)
 
 bool ArrayList::addAll(int index, ArrayList& list)
 {
-	bool returns = false;
 	if (index > count || index < 0)
 	{
-		return returns;
+		return false;
 	}
 	else
 	{
@@ -110,8 +109,7 @@ bool ArrayList::addAll(int index, ArrayList& list)
 			data[i] = list.data[i - index];
 		}
 		count += list.count;
-		returns = true;
-		return returns;
+		return true;
 	}
 }
 
@@ -126,64 +124,57 @@ void ArrayList::clear()
 
 bool ArrayList::contains(int element)
 {
-	bool returns = false;
 	for (int i = 0; i < count; ++i)
 	{
 		if (data[i] == element)
 		{
-			returns = true;
+			return true;
 		}
 	}
-	return returns;
+	return false;
 }
 
 int ArrayList::get(int index)
 {
-	int returns = -1;
 	if (index >= count || index < 0)
 	{
-		return returns;
+		return -1;
 	}
 	else
 	{
-		returns = data[index];
-		return returns;
+		return data[index];
 	}
 }
 
 int ArrayList::indexOf(int element)
 {
-	int returns = -1;
 	for (int i = 0; i < count; ++i)
 	{
 		if (data[i] == element) 
 		{
-			returns = i;
-			return returns;
+			return i;
 		}
 	}
-	return returns;
+	return -1;
 }
 
 bool ArrayList::isEmpty()
 {
-	bool returns = false;
 	for (int i = 0; i < count; ++i)
 	{
 		if (data[i] != 0)
 		{
-			returns = true;
+			return true;
 		}
 	}
-	return returns;
+	return false;
 }
 
 bool ArrayList::remove(int index) 
 {
-	bool returns = false;
 	if (index < 0 || index > count - 1)
 	{
-		return returns;
+		return false;
 	}
 	else
 	{
@@ -192,25 +183,23 @@ bool ArrayList::remove(int index)
 			data[i] = data[i + 1];
 		}
 		--count;
-		returns = true;
-		return returns;
+		return true;
 	}
 }
 
 bool ArrayList::swap(int index1, int index2)
 {
-	bool returns = false;
+
 	if (index1 < 0 || index2 < 0 || index1 > count - 1 || index2 > count - 1)
 	{
-		return returns;
+		return false;
 	}
 	else
 	{
 		int x = data[index1];
 		data[index1] = data[index2];
 		data[index2] = x;
-		returns = true;
-		return returns;
+		return true;
 	}
 }
  
