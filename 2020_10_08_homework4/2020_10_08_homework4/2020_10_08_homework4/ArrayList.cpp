@@ -160,14 +160,7 @@ int ArrayList::indexOf(int element)
 
 bool ArrayList::isEmpty()
 {
-	for (int i = 0; i < count; ++i)
-	{
-		if (data[i] != 0)
-		{
-			return true;
-		}
-	}
-	return false;
+	return(count == 0);
 }
 
 bool ArrayList::remove(int index) 
