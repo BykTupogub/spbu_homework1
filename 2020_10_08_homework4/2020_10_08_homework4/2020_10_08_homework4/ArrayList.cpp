@@ -76,15 +76,12 @@ void ArrayList::add(int index, int element)
 
 void ArrayList::addAll(ArrayList& list)
 {
-	for (int i = count; i < count + list.count; ++i)
+	for (int i = count; i < count + list.count; i+=2)
 	{
-		if (capacity == count)
-		{
-			expandArray(data, capacity);
-		}
-		data[i] = list.data[i - count];
+		add(list.data[i - count]);
+	
 	}
-	count += list.count;
+	
 
 }
 
@@ -94,23 +91,21 @@ bool ArrayList::addAll(int index, ArrayList& list)
 	{
 		return false;
 	}
-	else
+
+	for (int i = count - 1; i > index - 1; --i)
 	{
-		for (int i = count - 1; i > index - 1; --i)
+		if (capacity == count)
 		{
-			if (capacity == count)
-			{
-				expandArray(data, capacity);
-			}
-			data[i + list.count] = data[i];
+			expandArray(data, capacity);
 		}
-		for (int i = index; i < index + list.count; ++i)
-		{
-			data[i] = list.data[i - index];
-		}
-		count += list.count;
-		return true;
+		data[i + list.count] = data[i];
 	}
+	for (int i = index; i < index + list.count; ++i)
+	{
+		data[i] = list.data[i - index];
+	}
+	count += list.count;
+	return true;
 }
 
 
@@ -140,10 +135,8 @@ int ArrayList::get(int index)
 	{
 		return -1;
 	}
-	else
-	{
-		return data[index];
-	}
+	return data[index];
+
 }
 
 int ArrayList::indexOf(int element)
@@ -169,15 +162,12 @@ bool ArrayList::remove(int index)
 	{
 		return false;
 	}
-	else
+	for (int i = index; i < count - 1; ++i)
 	{
-		for (int i = index; i < count - 1; ++i)
-		{
-			data[i] = data[i + 1];
-		}
-		--count;
-		return true;
+		data[i] = data[i + 1];
 	}
+	--count;
+	return true;
 }
 
 bool ArrayList::swap(int index1, int index2)
@@ -187,12 +177,9 @@ bool ArrayList::swap(int index1, int index2)
 	{
 		return false;
 	}
-	else
-	{
-		int x = data[index1];
-		data[index1] = data[index2];
-		data[index2] = x;
-		return true;
-	}
+	int x = data[index1];
+	data[index1] = data[index2];
+	data[index2] = x;
+	return true;
 }
  
