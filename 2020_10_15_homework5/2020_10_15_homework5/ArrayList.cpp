@@ -1,5 +1,4 @@
 #include "ArrayList.h"
-#include <math.h>
 
 ArrayList::~ArrayList()
 {
@@ -49,13 +48,14 @@ void ArrayList::addNumberToStr(int& index, int number)
 	int length = numLength(number);
 	if (number < 0)
 	{
+		number *= -1;
 		str[index] = '-';
 		index++;
 		--length;
 	}
 	for (int i = 0; i < length; ++i)
 	{
-		int digit = abs(number % 10);
+		int digit = number % 10;
 		str[index + length - 1 - i] = '0' + digit;
 		number /= 10;
 	}
