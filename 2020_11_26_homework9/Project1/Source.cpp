@@ -25,45 +25,6 @@ void resolveError(int errorCode)
 
 	cout << errorCout[rand() % (2)][errorCode - 1] << endl << endl;
 
-	switch (errorCode)
-	{
-	case 1:
-	{
-		cout << "Ошибка в первом числе, извините" << endl << endl;
-	}
-	break;
-	case 2:
-	{
-		cout << "Отсутствует второе число, извините" << endl << endl;
-	}
-	break;
-	case 3:
-	{
-		cout << "Вы ничего не ввели, извините" << endl << endl;
-	}
-	break;
-	case 4:
-	{
-		cout << "Ошибка в целой части второго числа, извините" << endl << endl;
-	}
-	break;
-	case 5:
-	{
-		cout << "Ошибка в дробной части второго числа, извините" << endl;
-	}
-	break;
-	case 6:
-	{
-		cout << "Первое число слшком большое, извините" << endl;
-	}
-	break;
-	case 7:
-	{
-		cout << "Второе число слишком большое, извините" << endl;
-	}
-	break;
-
-	}
 }
 
 void trim(string& str)
