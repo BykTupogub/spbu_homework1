@@ -200,8 +200,11 @@ int LinkedList::extractTail()
 	}
 	if (count == 1)
 	{
-		int x = head->data;
+		Node* temp = tail;
 		head = tail = nullptr;
+		int x = temp->data;
+		delete temp;
+		--count;
 		return x;
 	}
 	Node* temp = head;
@@ -238,6 +241,7 @@ int LinkedList::extract(int index)
 	while (index > 1)
 	{
 		temp = temp->next;
+		--index;
 	}
 	Node* node = temp;
 	temp = temp->next;
@@ -264,26 +268,19 @@ LinkedList& LinkedList::operator=(LinkedList list)
 			addToTail(temp->data);
 			temp = temp->next;
 		}
+		delete temp;
 	}
 	return *this;
 }
 
 int LinkedList::indexOf(int element)
-{
-	if (head == tail)
-	{
-		if (head->data == element)
-		{
-			return 0;
-		}
-		return -1;
-	}
+{ 
 	Node* temp = head;
 	for (int i = 0; i < count; ++i)
 	{
 		if (temp->data == element)
 		{
-			return i;
+			return i; 
 		}
 		temp = temp->next;
 	}
