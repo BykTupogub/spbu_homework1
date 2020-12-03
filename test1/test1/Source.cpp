@@ -8,7 +8,7 @@ double myFunction(double x, int n)
 	double sum = 0;
 	double ti = 1;
 	int i = 1;
-	while (abs(sum - exp(x)) > pow(10, -(n+1)))
+	while (abs(ti) > pow(10, -(n+1)))
 	{
 		sum += ti;
 		ti = (ti*x)/i;
