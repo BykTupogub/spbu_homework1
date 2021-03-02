@@ -2,40 +2,58 @@
 
 using namespace std;
 
-bool operand1(char c[])
+bool operand1(char a[])
 {
-	char a[] = { '-','-','o','p','e','r','a','n','d','1' };
-	for (int i = 0; c[i] != 0; ++i)
+	char x[] = { '-','-','o','p','e','r','a','n','d','1' };
+	int i = 0;
+	while (a[i] != 0)
 	{
-		if (c[i] != a[i])
+		if (a[i] != x[i])
 		{
 			return false;
 		}
+		++i;
+	}
+	if (i != 10)
+	{
+		return false;
 	}
 	return true;
 }
 
-bool operat(char c[])
+bool operat(char a[])
 {
-	char a[] = { '-','-','o','p','e','r','a','t','o','r' };
-	for (int i = 0; c[i] != 0; ++i)
+	char x[] = { '-','-','o','p','e','r','a','t','o','r' };
+	int i = 0;
+	while (a[i] != 0)
 	{
-		if (c[i] != a[i])
+		if (a[i] != x[i])
 		{
 			return false;
 		}
+		++i;
+	}
+	if (i != 10)
+	{
+		return false;
 	}
 	return true;
 }
-bool operand2(char c[])
+bool operand2(char a[])
 {
-	char a[] = { '-','-','o','p','e','r','a','n','d','2' };
-	for (int i = 0; c[i] != 0; ++i)
+	char x[] = { '-','-','o','p','e','r','a','n','d','2' };
+	int i = 0;
+	while (a[i] != 0)
 	{
-		if (c[i] != a[i])
+		if (a[i] != x[i])
 		{
 			return false;
 		}
+		++i;
+	}
+	if (i != 10)
+	{
+		return false;
 	}
 	return true;
 }
@@ -189,7 +207,7 @@ int main(int argc, char* argv[] ){
 			}
 		}
 		
-		
+		cout << e1 << " " << e2 << " " << e3 << "-------" << endl;
 
 		if (e1 == -1)
 		{
