@@ -27,7 +27,6 @@ bool operat(char c[])
 	}
 	return true;
 }
-
 bool operand2(char c[])
 {
 	char a[] = { '-','-','o','p','e','r','a','n','d','2' };
