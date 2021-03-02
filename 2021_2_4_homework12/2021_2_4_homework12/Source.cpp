@@ -91,7 +91,6 @@ float tofloat(char* a, int &e)
 			if (a[i] >= 48 && a[i] <= 58)
 			{
 				xx = xx*10 + (a[i] - '0');
-				cout << xx << endl;
 			}
 			else
 			{	
@@ -181,11 +180,7 @@ int main(int argc, char* argv[] ){
 	float a = 0;
 	float b = 0;
 	
-	for (int i = 0; i < argc; ++i)
-	{
-		cout << i << " " << argv[i] << endl;
-	}
-
+	
 	if (argc == 7)
 	{
 		int e1 = -1;
@@ -206,8 +201,6 @@ int main(int argc, char* argv[] ){
 				e3 = i;
 			}
 		}
-		
-		cout << e1 << " " << e2 << " " << e3 << "-------" << endl;
 
 		if (e1 == -1)
 		{
