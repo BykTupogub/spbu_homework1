@@ -87,6 +87,7 @@ std::ostream& operator<<(std::ostream& stream, const Queue queue)
 			}
 			temp = temp->next;
 		}
+		delete temp;
 	}
 	stream << "}";
 
