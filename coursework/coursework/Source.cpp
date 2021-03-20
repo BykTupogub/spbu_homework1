@@ -38,11 +38,11 @@ int main(int argc, char* argv[])
 	}
 
 	Image elementImage;
-	if (!elementImage.loadFromFile("map.png"))
+	if (!elementImage.loadFromFile("img/map.png"))
 	{
 		cout << "img error" << endl;
 	}
-	//elementImage.createMaskFromColor(Color(0, 0, 0));
+
 	Texture map;
 	map.loadFromImage(elementImage);
 	Sprite s_map;
