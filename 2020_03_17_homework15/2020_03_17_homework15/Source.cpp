@@ -1,5 +1,6 @@
 #include<iostream>
 #include <ctime>
+#include<fstream>
 
 using namespace std;
 
@@ -41,17 +42,17 @@ int partition(int* a, int p, int r)
     return i + 1;
 }
 
-void quickSort(int* a, int p, int r)
+void QuickSort(int* a, int p, int r)
 {
     int q;
     if (p < r) {
         q = partition(a, p, r);
-        quickSort(a, p, q - 1);
-        quickSort(a, q + 1, r);
+        QuickSort(a, p, q - 1);
+        QuickSort(a, q + 1, r);
     }
 }
 
-void countingSort(int* a, int n, const int k) {
+void CountingSort(int* a, int n, const int k) {
     const int K = k + 1;
     int* c = new int[k + 1];
     for (int i = 0; i < k + 1; ++i)
@@ -71,18 +72,18 @@ void countingSort(int* a, int n, const int k) {
     delete[] c;
 }
 
-void merger(int* c, int* a, int *b, int n, int m)
+void Merge(int* c, int* a, int *b, int n, int m)
 {
     int q = 0;
     int g = 0;
     for (int i = 0; i < n + m; ++i)
     {
-        if (q < n && a[q] <= b[g])
+        if ((g == m || a[q] <= b[g]) && q < n)
         {
             c[i] = a[q];
             ++q;
         }
-        else if(g < m)
+        else
         {
             c[i] = b[g];
             g++;
@@ -99,7 +100,7 @@ int main()
     initArray(a, len);
     printArray(a, len);
     cout << endl;
-    countingSort(a, len, 10);
+    CountingSort(a, len, 10);
     printArray(a, len);
     cout << endl << endl;
 
@@ -107,13 +108,58 @@ int main()
     initArray(b, len);
     printArray(b, len);
     cout << endl;
-    quickSort(b, 0, len - 1);
+    QuickSort(b, 0, len - 1);
     printArray(b, len);
     cout << endl << endl;
 
     int* c = new int[2*len];
-    merger(c, a, b, len, len);
+    Merge(c, a, b, len, len);
     printArray(c, 2*len);
+    cout << endl << endl;
+
+    char str[16] = { "Блин чёрт, блин" };
+    char x = '0';
+    fstream fbin;
+
+    fbin.open("in.bin", ios::binary | ios::out);
+    if (!fbin)
+    {
+        cout << "Не удалось открыть файл" << endl;
+    }
+    fbin.write((char*)str, sizeof(str));
+    fbin.close();
+
+    fbin.open("in.bin", ios::binary | ios::out | ios::in);
+    if (!fbin)
+    {
+        cout << "Не удалось открыть файл" << endl;
+    }
+    while (!fbin.eof())
+    {
+        fbin.read((char*)&x, sizeof(char));
+        cout << x;
+        if (x == 'а' || x == 'у' || x == 'о' || x == 'ы' || x == 'и' || x == 'э' || x == 'я' || x == 'ю' || x == 'ё' || x == 'е')
+        {
+            fbin.seekg(-(int)sizeof(char), ios::cur);
+            x = '#';
+            fbin.write((char*)&x, sizeof(char));
+            fbin.seekg(fbin.tellg(), ios::beg);
+        }
+        
+    }
+    cout << endl;
+    fbin.close();
+
+    fbin.open("in.bin", ios::in);
+    while (!fbin.eof())
+    {
+        fbin.read((char*)&x, sizeof(char));
+        cout << x;
+    }
+    cout << endl;
+
+    fbin.close();
+
 
     delete[] a;
     delete[] b;
