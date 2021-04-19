@@ -27,9 +27,9 @@ bool Queue::indexValid(int index)
 	return index >= 0 && index < count;
 }
 
-void Queue::push(int data)
+void Queue::push(int i, int j)
 {
-	Node* newNode = new Node(data, NULL);
+	Node* newNode = new Node(i, j, NULL);
 
 	if (lenght() == 0)
 	{
@@ -43,7 +43,7 @@ void Queue::push(int data)
 	++count;
 }
 
-int Queue::get()
+Node* Queue::get()
 {
 	Node* temp = head;
 	if (head == tail)
@@ -55,17 +55,17 @@ int Queue::get()
 		head = head->next;
 	}
 	--count;
-	return temp->data;
+	return temp;
 }
 
-int Queue::front()
+Node* Queue::front()
 {
-	return head->data;
+	return head;
 }
 
-int Queue::back()
+Node* Queue::back()
 {
-	return tail->data;
+	return tail;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Queue queue)
@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream& stream, const Queue queue)
 		Node* temp = queue.head;
 		while (temp != nullptr)
 		{
-			stream << temp->data;
+			stream << '(' << temp->i << ", " << temp->j << " )";
 			if (temp->next != nullptr)
 			{
 				stream << ", ";

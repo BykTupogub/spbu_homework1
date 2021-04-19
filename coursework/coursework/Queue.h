@@ -3,9 +3,10 @@
 
 struct Node {
 public:
-	int data;
+	int i;
+	int j;
 	Node* next;
-	Node(int data, Node* next = nullptr) :data(data), next(next) {}
+	Node(int i, int j, Node* next = nullptr) :i(i), j(j), next(next) {}
 };
 
 
@@ -27,13 +28,13 @@ public:
 
 	bool indexValid(int index);
 
-	void push(int data);
+	void push(int i, int j);
 
-	int get();
+	Node* get();
 
-	int front();
+	Node* front();
 
-	int back();
+	Node* back();
 
 	friend std::ostream& operator<<(std::ostream& stream, const Queue queue);
 
